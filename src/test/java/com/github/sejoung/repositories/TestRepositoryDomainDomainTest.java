@@ -1,9 +1,6 @@
 package com.github.sejoung.repositories;
 
 import com.github.sejoung.domain.DomainTest;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,15 +22,11 @@ public class TestRepositoryDomainDomainTest {
     public void insertTest(){
 
         var dt = DomainTest.builder().title("test").build();
-
         var saveDt = repository.save(dt);
+        var selectDtOptional = repository.findById(saveDt.getId());
+        Assert.isTrue(selectDtOptional.isPresent(),"값이 정확히 들어감");
 
-        var selectDt = repository.findById(saveDt.getId());
-
-        Assert.isTrue(selectDt.isPresent(),"값이 정확히 들어감");
-
-
-
+        repository.delete(saveDt);
     }
 
 }
