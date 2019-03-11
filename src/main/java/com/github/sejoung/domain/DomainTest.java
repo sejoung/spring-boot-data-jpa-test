@@ -15,7 +15,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @ToString
-@Entity
+@Entity(name = "TB_DOMAIN")
 public class DomainTest extends AbstractTimeEntity {
 
   @Id

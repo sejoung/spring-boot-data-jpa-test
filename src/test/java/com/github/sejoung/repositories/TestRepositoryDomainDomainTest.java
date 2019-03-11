@@ -25,11 +25,10 @@ public class TestRepositoryDomainDomainTest {
 
     var saveDt = repository.save(dt);
 
-    var selectDtOptional = repository.findById(saveDt.getId());
+    var isData = repository.existsById(saveDt.getId());
 
-    Assert.isTrue(selectDtOptional.isPresent(), "값이 정확히 들어감");
+    Assert.isTrue(isData, "값이 정확히 들어감");
     //log.debug(dt.getCreateDateTime().toString());
-    //log.debug(selectDtOptional.get().getCreateDateTime().toString());
 
     repository.delete(saveDt);
   }
