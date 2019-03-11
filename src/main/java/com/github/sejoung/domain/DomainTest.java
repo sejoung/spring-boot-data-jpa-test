@@ -8,17 +8,17 @@ import javax.persistence.*;
 @Getter
 @ToString
 @Entity
-public class DomainTest extends AbstractTimeEntity{
+public class DomainTest extends AbstractTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Column(length = 50, nullable = false)
-    private String title;
+  @Column(length = 50, nullable = false)
+  private String title;
 
-    @Builder
-    private DomainTest(String title) {
-        this.title = title;
-    }
+  @Builder
+  private DomainTest(String title) {
+    this.title = title;
+  }
 }

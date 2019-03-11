@@ -12,22 +12,22 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractTimeEntity {
 
-    @Column(nullable = false)
-    private LocalDateTime createDateTime;
+  @Column(nullable = false)
+  private LocalDateTime createDateTime;
 
-    @Column(nullable = false)
-    private LocalDateTime updateDateTime;
+  @Column(nullable = false)
+  private LocalDateTime updateDateTime;
 
-    @PrePersist
-    private void prePersist() {
-        LocalDateTime now = LocalDateTime.now();
-        this.setCreateDateTime(now);
-        this.setUpdateDateTime(now);
-    }
+  @PrePersist
+  private void prePersist() {
+    LocalDateTime now = LocalDateTime.now();
+    this.setCreateDateTime(now);
+    this.setUpdateDateTime(now);
+  }
 
-    @PreUpdate
-    private void preUpdate(){
-        LocalDateTime now = LocalDateTime.now();
-        this.setUpdateDateTime(now);
-    }
+  @PreUpdate
+  private void preUpdate() {
+    LocalDateTime now = LocalDateTime.now();
+    this.setUpdateDateTime(now);
+  }
 }
