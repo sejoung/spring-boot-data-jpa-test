@@ -2,18 +2,15 @@ package com.github.sejoung.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Getter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractTimeEntity {
 
   @Setter(value = AccessLevel.PRIVATE)
