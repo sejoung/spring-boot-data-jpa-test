@@ -1,12 +1,11 @@
 package com.github.sejoung.repositories;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.sejoung.domain.DomainTest;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -40,11 +39,10 @@ public class TestRepositoryDomainDomainTest {
     //초기화
     //repository.delete(saveDt);
 
-    assertThat(saveDt).as("잘저장됨").isNotNull();
-
-    assertThat(saveDt.getTitle()).as("타이틀").isEqualTo("test");
-    assertThat(saveDt.getId()).as("id가 있어야 된다.").isEqualTo(1);
-    assertThat(saveDt.getCreateDateTime()).as("생성일자가 있어야 된다").isNotNull();
+    assertThat(saveDt.getTitle()).as("타이틀이 저장된 값과 조회된 값이 같아야 된다.").isEqualTo("test");
+    assertThat(saveDt.getId()).as("id가 있어야 된다.").isNotNull();
+    assertThat(saveDt.getCreateDateTime().toLocalDate()).as("저장된 생성일자와 조회된 생성일자가 같아야 된다.")
+        .isEqualTo(dt.getCreateDateTime().toLocalDate());
 
 
   }
