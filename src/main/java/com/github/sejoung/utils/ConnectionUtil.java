@@ -4,14 +4,13 @@ package com.github.sejoung.utils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
-import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-@Getter
+
 @Setter
 @Component
 @Slf4j
@@ -33,7 +32,8 @@ public class ConnectionUtil {
 	}
 
 	protected HikariDataSource getDataSource(String ip) {
-		log.debug(" driverClassName={}, url={}, username={}, password={}",driverClassName,url,username,password);
+		log.debug(" driverClassName={}, url={}, username={}, password={}", driverClassName, url,
+				username, password);
 
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName(this.driverClassName);
@@ -43,6 +43,8 @@ public class ConnectionUtil {
 		config.setMinimumIdle(1);
 		config.setConnectionTimeout(3000);
 		config.setIdleTimeout(10000);
+		config.setMaxLifetime(4000);
+		config.setReadOnly(true);
 		return new HikariDataSource(config);
 	}
 

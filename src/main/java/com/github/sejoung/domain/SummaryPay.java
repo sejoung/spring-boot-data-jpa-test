@@ -25,10 +25,16 @@ public class SummaryPay extends AbstractTimeEntity {
   private SummaryPayKey key;
 
   @Column
-  private Long cnt;
+  private Integer cnt;
 
   @Column
-  private Long amount;
+  private Integer amount;
 
+  @Builder
+  private SummaryPay(SummaryPayKey key, Integer cnt, Integer amount) {
+    this.key = key;
+    this.cnt = cnt;
+    this.amount = amount;
+  }
 
 }
