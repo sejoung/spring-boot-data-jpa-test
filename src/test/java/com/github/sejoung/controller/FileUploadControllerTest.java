@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.FileInputStream;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,10 @@ public class FileUploadControllerTest {
 
 	@Test
 	public void handleFileUpload() throws Exception {
-		MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt",
-				"text/plain", "테스트 하는중".getBytes());
+		MockMultipartFile multipartFile = new MockMultipartFile("file", "test.xlsx",
+				"text/plain", new FileInputStream("src/test/resources/test.xlsx"));
 		this.mvc.perform(multipart("/upload").file(multipartFile))
 				.andDo(print())
 				.andExpect(status().isOk());
-
 	}
 }
