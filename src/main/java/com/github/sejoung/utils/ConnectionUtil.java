@@ -4,16 +4,25 @@ package com.github.sejoung.utils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+@Getter
+@Setter
 @Component
+@Slf4j
+@ConfigurationProperties(prefix = "com.gihub.sejoung.connection")
 public class ConnectionUtil {
 
-	private final static String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private final static String JDBC_URL = "jdbc:sqlserver://%s\\\\SQLEXPRESS:2433;database=TEST";
-	private final static String USER_NAME = "test";
-	private final static String PASSWORD = "test";
+	private String driverClassName;
+	private String url;
+	private String username;
+	private String password;
+
 
 	public JdbcTemplate createJdbcTemplate(String ip) {
 		return this.getJdbcTemplate(this.getDataSource(ip));
@@ -24,11 +33,13 @@ public class ConnectionUtil {
 	}
 
 	protected HikariDataSource getDataSource(String ip) {
+		log.debug(" driverClassName={}, url={}, username={}, password={}",driverClassName,url,username,password);
+
 		HikariConfig config = new HikariConfig();
-		config.setDriverClassName(JDBC_DRIVER);
-		config.setJdbcUrl(String.format(JDBC_URL, ip));
-		config.setUsername(USER_NAME);
-		config.setPassword(PASSWORD);
+		config.setDriverClassName(this.driverClassName);
+		config.setJdbcUrl(String.format(this.url, ip));
+		config.setUsername(this.username);
+		config.setPassword(this.password);
 		config.setMinimumIdle(1);
 		config.setConnectionTimeout(3000);
 		config.setIdleTimeout(10000);
