@@ -3,9 +3,6 @@ package com.github.sejoung.domain;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -21,20 +18,20 @@ import lombok.ToString;
 @Table(name = "TB_SUMMARY_PAY")// 명시적으로 테이블을 지정할수 있음
 public class SummaryPay extends AbstractTimeEntity {
 
-  @EmbeddedId
-  private SummaryPayKey key;
+	@EmbeddedId
+	private SummaryPayKey key;
 
-  @Column
-  private Integer cnt;
+	@Column
+	private Integer cnt;
 
-  @Column
-  private Integer amount;
+	@Column
+	private Integer amount;
 
-  @Builder
-  private SummaryPay(SummaryPayKey key, Integer cnt, Integer amount) {
-    this.key = key;
-    this.cnt = cnt;
-    this.amount = amount;
-  }
+	@Builder
+	private SummaryPay(SummaryPayKey key, Integer cnt, Integer amount) {
+		this.key = key;
+		this.cnt = cnt;
+		this.amount = amount;
+	}
 
 }

@@ -1,7 +1,6 @@
 package com.github.sejoung.domain;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -19,27 +18,27 @@ import lombok.ToString;
 @Table(name = "TB_SUMMARY_KCP")// 명시적으로 테이블을 지정할수 있음
 public class SummaryKCP extends AbstractTimeEntity {
 
-  @Id
-  private String day;
+	@Id
+	private String day;
 
-  @Column
-  private Long cnt;
+	@Column
+	private Long cnt;
 
-  @Column
-  private Long amount;
+	@Column
+	private Long amount;
 
-  @Column
-  private Long cancelCnt;
+	@Column
+	private Long cancelCnt;
 
-  @Column
-  private Long cancelAmount;
+	@Column
+	private Long cancelAmount;
 
-  @Builder
-  private SummaryKCP(String day, Long cnt, Long amount, Long cancelCnt, Long cancelAmount) {
-    this.day = day;
-    this.cnt = cnt;
-    this.amount = amount;
-    this.cancelCnt = cancelCnt;
-    this.cancelAmount = cancelAmount;
-  }
+	@Builder
+	private SummaryKCP(String day, Long cnt, Long amount, Long cancelCnt, Long cancelAmount) {
+		this.day = day;
+		this.cnt = cnt;
+		this.amount = amount;
+		this.cancelCnt = cancelCnt;
+		this.cancelAmount = cancelAmount;
+	}
 }
