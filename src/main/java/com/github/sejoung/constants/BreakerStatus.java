@@ -10,14 +10,10 @@ import java.util.stream.Stream;
 
 public enum BreakerStatus {
 
-    RELAY_IN_OPEN("relayInOpen", "입구 안열림"),
-    RELAY_OUT_OPEN("relayOutOpen", "출구 안열림"),
-    RELAY_IN_CLOSE("relayInClose", "입구 안닫힘"),
-    RELAY_OUT_CLOSE("relayOutClose", "출구 안닫힘"),
-    TRY_1_PASS("try1Pass", "한번에 성공"),
-    TRY_2_PASS("try2Pass", "두번에 성공"),
-    TRY_3_PASS("try3Pass", "세번에 성공"),
-    TRY_4_PASS("try4Pass", "네번에 성공");
+    RELAY_IN_OPEN("relayInOpen", "입구 열림 릴레이"),
+    RELAY_OUT_OPEN("relayOutOpen", "출구 열림 릴레이"),
+    RELAY_IN_CLOSE("relayInClose", "입구 닫힘 릴레이"),
+    RELAY_OUT_CLOSE("relayOutClose", "출구 닫힘 릴레이");
 
     private static final Map<String, BreakerStatus> stringToEnum =
         Stream.of(values()).collect(toMap(Objects::toString, e -> e));

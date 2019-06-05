@@ -26,42 +26,18 @@ public class BreakerAPIControllerTest {
 	private MockMvc mockMvc;
 
 	@Test
-	public void parkingBreakerIsUnsupportedMediaType() throws Exception {
-		this.mockMvc.perform(post(breakerAPIControllerParkingBreakerUrl)
-				.content(
-						"{\"parkSeq\":\"512\",\"opCode\":\"1\",\"deviceId\":\"M01\",\"event\":\"RELAY_IN_OPEN\"}"))
-				.andDo(print())
-				.andExpect(status().isUnsupportedMediaType());
-	}
-
-
-	@Test
 	public void parkingBreakerIsOk() throws Exception {
 		this.mockMvc.perform(post(breakerAPIControllerParkingBreakerUrl)
-				.content(
-						"{\"parkSeq\":\"512\",\"opCode\":\"1\",\"deviceId\":\"M01\",\"event\":\""
-								+ BreakerStatus.RELAY_IN_CLOSE.toString() + "\"}")
+				.content("{\"event\":\"" + BreakerStatus.RELAY_IN_CLOSE.toString() + "\"}")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andDo(print())
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	public void parkingBreakerNoParkSeq() throws Exception {
-		this.mockMvc.perform(post(breakerAPIControllerParkingBreakerUrl)
-				.content(
-						"{\"parkSeq\":\"\",\"opCode\":\"1\",\"deviceId\":\"M01\",\"event\":\""
-								+ BreakerStatus.RELAY_IN_CLOSE.toString() + "\"}")
-				.contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andDo(print())
-				.andExpect(status().isBadRequest());
-	}
-
-	@Test
 	public void parkingBreakerNoEvent() throws Exception {
 		this.mockMvc.perform(post(breakerAPIControllerParkingBreakerUrl)
-				.content(
-						"{\"parkSeq\":\"512\",\"opCode\":\"1\",\"deviceId\":\"M01\",\"event\":\"\"}")
+				.content("{\"event\":\"\"}")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andDo(print())
 				.andExpect(status().isBadRequest());
@@ -70,8 +46,7 @@ public class BreakerAPIControllerTest {
 	@Test
 	public void parkingBreakerBadEvent() throws Exception {
 		this.mockMvc.perform(post(breakerAPIControllerParkingBreakerUrl)
-				.content(
-						"{\"parkSeq\":\"512\",\"opCode\":\"1\",\"deviceId\":\"M01\",\"event\":\"12313\"}")
+				.content("{\"event\":\"test\"}")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andDo(print())
 				.andExpect(status().isBadRequest());
